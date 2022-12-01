@@ -25,8 +25,8 @@ export function sumCalories(foodItemsOfOneElf: string): number {
   return caloriesOfOneElf;
 }
 
-const day1Result: number = findElfWithMostCalories(day1Data);
-console.log("The elf carrying the most calories and the solution to day 1, part 1, is: ", day1Result);
+const day1Part1Result: number = findElfWithMostCalories(day1Data);
+console.log("The elf carrying the most calories and the solution to day 1, part 1, is carrying: ", day1Part1Result, " calories");
 
 /**
  * Day 1, part 2 of Advent of Code 2022
@@ -74,3 +74,6 @@ function getDigit(elfCalories: number, digitPlaceFromBack: number): number {
     const lastRemainingDigit: number = allDigitsUpToDigit % 10;
     return lastRemainingDigit;
 }
+
+const day1Part2Result: number = findTopThreeElvesWithMostCalories(day1Data);
+console.log("The three elves carrying the most calories and the solution to day 1, part 1, are carrying: ", day1Part2Result, " calories in total");
