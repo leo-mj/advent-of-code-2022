@@ -26,4 +26,4 @@ export function sumCalories(foodItemsOfOneElf: string): number {
 }
 
 const day1Result: number = findElfWithMostCalories(day1Data);
-console.log(day1Result);
+console.log("The elf carrying the most calories and the solution to day 1 is: ", day1Result);
