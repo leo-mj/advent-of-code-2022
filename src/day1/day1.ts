@@ -27,7 +27,7 @@ export function sumCalories(foodItemsOfOneElf: string): number {
 
 const day1Part1Result: number = findElfWithMostCalories(day1Data);
 console.log(
-  "The elf carrying the most calories and the solution to day 1, part 1, is carrying: ",
+  "Day1, Part1: The elf carrying the most calories and the solution to day 1, part 1, is carrying: ",
   day1Part1Result,
   " calories",
 );
@@ -86,7 +86,7 @@ function getDigit(elfCalories: number, digitPlaceFromBack: number): number {
 
 const day1Part2Result: number = findTopThreeElvesWithMostCalories(day1Data);
 console.log(
-  "The three elves carrying the most calories and the solution to day 1, part 1, are carrying: ",
+  "Day1, Part2: The three elves carrying the most calories and the solution to day 1, part 1, are carrying: ",
   day1Part2Result,
   " calories in total",
 );
