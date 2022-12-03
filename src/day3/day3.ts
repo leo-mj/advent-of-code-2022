@@ -16,6 +16,17 @@ export function findMisplacedItemAndPriority(backpack: string): number {
 }
 
 export function findMisplacedItem(backpack: string): string {
+  const itemsInFirstCompartment: { [item: string]: boolean } = {};
+  for (let i = 0; i < backpack.length / 2; i++) {
+    const item: string = backpack[i];
+    itemsInFirstCompartment[item] = true;
+  }
+  for (let i = backpack.length / 2; i < backpack.length; i++) {
+    const item: string = backpack[i];
+    if (itemsInFirstCompartment[item]) {
+      return item;
+    }
+  }
   return "";
 }
 
