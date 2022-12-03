@@ -48,3 +48,56 @@ export function findPriority(item: string): number {
 
 const day3Part1Result: number = findPrioritiesOfMisplacedItems(backpacks);
 console.log("Day3, Part1: The sum of priorities is: ", day3Part1Result);
+
+/**
+ * Day 3, part 2 of Advent of Code 2022
+ * @param backpacksAsStr string with backpack items in each row
+ * @returns the sum of priority values of the items that appear in each row of groups of three rows
+ */
+export function findPrioritiesOfBadgeItems(backpacksAsStr: string): number {
+  const backpacksAsArr: string[] = backpacksAsStr.split(`\n`);
+  const elfGroups: string[][] = [];
+  let currentElfGroup: string[] = [];
+  for (const backpack of backpacksAsArr) {
+    if (currentElfGroup.length === 3) {
+      elfGroups.push(currentElfGroup);
+      currentElfGroup = [];
+    }
+    currentElfGroup.push(backpack);
+  }
+  elfGroups.push(currentElfGroup);
+  const groupPriorities: number[] = elfGroups.map(findBadgeItemAndPriority);
+  const sumOfPriorities: number = groupPriorities.reduce(
+    (sumSoFar, nextPriority) => sumSoFar + nextPriority,
+    0,
+  );
+  return sumOfPriorities;
+}
+
+export function findBadgeItemAndPriority(elfGroup: string[]): number {
+  const badgeItem: string = findBadgeItem(elfGroup);
+  const priority: number = findPriority(badgeItem);
+  return priority;
+}
+
+export function findBadgeItem([first, second, third]: string[]): string {
+  const inFirst: { [item: string]: boolean } = {};
+  for (let i = 0; i < first.length; i++) {
+    const currentItem: string = first[i];
+    inFirst[currentItem] = true;
+  }
+  const inFirstAndSecond: { [item: string]: boolean } = {};
+  for (let i = 0; i < second.length; i++) {
+    const currentItem: string = second[i];
+    if (inFirst[currentItem]) {
+      inFirstAndSecond[currentItem] = true;
+    }
+  }
+  for (let i = 0; i < third.length; i++) {
+    const currentItem: string = third[i];
+    if (inFirstAndSecond[currentItem]) {
+      return currentItem;
+    }
+  }
+  return "";
+}

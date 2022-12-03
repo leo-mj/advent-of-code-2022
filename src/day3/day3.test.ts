@@ -1,10 +1,14 @@
 import {
+  findBadgeItem,
+  findBadgeItemAndPriority,
   findMisplacedItem,
   findMisplacedItemAndPriority,
+  findPrioritiesOfBadgeItems,
   findPrioritiesOfMisplacedItems,
   findPriority,
 } from "./day3";
 
+// Part 1
 test("test for findPriority", () => {
   expect(findPriority("A")).toBe(27);
   expect(findPriority("a")).toBe(1);
@@ -37,4 +41,32 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw`;
 test("test for findPrioritiesOfMisplacedItems", () => {
   expect(findPrioritiesOfMisplacedItems(testInput)).toBe(157);
+});
+
+// Part 2
+test("test for findBadgeItem", () => {
+  expect(
+    findBadgeItem([
+      "vJrwpWtwJgWrhcsFMMfFFhFp",
+      "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+      "PmmdzqPrVvPwwTWBwg",
+    ]),
+  ).toBe("r");
+  expect(
+    findBadgeItem([
+      "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+      "ttgJtRGJQctTZtZT",
+      "CrZsJsPPZsGzwwsLwLmpwMDw",
+    ]),
+  ).toBe("Z");
+});
+
+test("test for findPrioritiesOfBadgeItems", () => {
+  const testPart2: string = `vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
+wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+ttgJtRGJQctTZtZT
+CrZsJsPPZsGzwwsLwLmpwMDw`;
+  expect(findPrioritiesOfBadgeItems(testPart2)).toBe(70);
 });
