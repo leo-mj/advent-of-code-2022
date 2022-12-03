@@ -101,3 +101,6 @@ export function findBadgeItem([first, second, third]: string[]): string {
   }
   return "";
 }
+
+const day3Part2Result: number = findPrioritiesOfBadgeItems(backpacks);
+console.log("Day3, Part2: The sum of priorities is: ", day3Part2Result);
