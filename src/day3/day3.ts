@@ -5,6 +5,7 @@ export function findPrioritiesOfMisplacedItems(backpacksAsStr: string): number {
   );
   const sumOfPriorities: number = prioritiesOfMisplacedItems.reduce(
     (sumSoFar, nextPriority) => sumSoFar + nextPriority,
+    0,
   );
   return sumOfPriorities;
 }
@@ -12,7 +13,7 @@ export function findPrioritiesOfMisplacedItems(backpacksAsStr: string): number {
 export function findMisplacedItemAndPriority(backpack: string): number {
   const misplacedItem: string = findMisplacedItem(backpack);
   const priority: number = findPriority(misplacedItem);
-  return 0;
+  return priority;
 }
 
 export function findMisplacedItem(backpack: string): string {
