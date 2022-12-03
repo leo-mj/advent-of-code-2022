@@ -1,3 +1,10 @@
+import { backpacks } from "./day3-data";
+
+/**
+ * Day 3, part 1 of Advent of Code 2022
+ * @param backpacksAsStr string with backpack items in each row
+ * @returns the sum of priority values of the items that appear in both halves of each row
+ */
 export function findPrioritiesOfMisplacedItems(backpacksAsStr: string): number {
   const backpacksAsArr: string[] = backpacksAsStr.split(`\n`);
   const prioritiesOfMisplacedItems: number[] = backpacksAsArr.map(
@@ -38,3 +45,6 @@ export function findPriority(item: string): number {
   }
   return codepoint - 96;
 }
+
+const day3Part1Result: number = findPrioritiesOfMisplacedItems(backpacks);
+console.log("Day3, Part1: The sum of priorities is: ", day3Part1Result);
