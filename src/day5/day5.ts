@@ -99,3 +99,43 @@ function checkTop(crates: Crates): string {
 
 const day5Part1Result: string = findTopCrates(day5Input);
 console.log("Day 5, Part 1: The top crates are: ", day5Part1Result);
+
+export function findTopCratesMovingMultiple(rawInput: string): string {
+  const [crates, instructionArr]: [Crates, string[]] = turnIntoArrs(rawInput);
+  const rearrangedCrates: Crates = rearrangeCratesWithMultipleAtOnce(
+    crates,
+    instructionArr,
+  );
+  const topCrates: string = checkTop(rearrangedCrates);
+  return topCrates;
+}
+
+function rearrangeCratesWithMultipleAtOnce(
+  crates: Crates,
+  instructionArr: string[],
+): Crates {
+  for (const instruction of instructionArr) {
+    // console.log(crates);
+    const { numberOfCrates, takeFrom, putOn }: Instruction =
+      parseInstruction(instruction);
+    // console.log(numberOfCrates, takeFrom, putOn);
+    const cratesToMove: string[] = [];
+    for (let i = 0; i < numberOfCrates; i++) {
+      const crateToMove: string | undefined = crates[takeFrom].pop();
+      if (crateToMove) {
+        cratesToMove.push(crateToMove);
+      }
+    }
+    // console.log(cratesToMove)
+    for (let i = cratesToMove.length - 1; i >= 0; i--) {
+      const crate: string = cratesToMove[i];
+      crates[putOn].push(crate);
+    }
+  }
+  //console.log(crates);
+
+  return crates;
+}
+
+const day5Part2Result: string = findTopCratesMovingMultiple(day5Input);
+console.log("Day 5, Part 2: The top crates are: ", day5Part2Result);
