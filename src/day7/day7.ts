@@ -1,3 +1,10 @@
+import { commandData } from "./day7-data";
+
+/**
+ * Day 7, Part 1 of Advent of Code 2022
+ * @param commands string of command lines
+ * @returns total size of directories under 100k - number
+ */
 export function findTotalDirectorySizes(commands: string): number {
   const commandsArr: string[] = commands.split(`\n`);
   const sizes: Sizes = {};
@@ -26,12 +33,10 @@ function interpretLine(
   outerDirectories: string[],
 ): string {
   const isCommand: boolean = line[0] === `$`;
+  const isFile: boolean = line[0].toUpperCase() === line[0].toLowerCase();
   if (isCommand) {
     currentDirectory = executeCommand(line, currentDirectory, outerDirectories);
-    return currentDirectory;
-  }
-  const isFile: boolean = line[0].toUpperCase() === line[0].toLowerCase();
-  if (isFile) {
+  } else if (isFile) {
     addFileSizes(line, sizes, currentDirectory, outerDirectories);
   }
   return currentDirectory;
@@ -57,7 +62,7 @@ function executeCommand(
     return "/";
   }
   outerDirectories.push(currentDirectory);
-  return directory;
+  return directory + currentDirectory;
 }
 
 function addFileSizes(
@@ -74,7 +79,11 @@ function addFileSizes(
     sizes[currentDirectory] = sizeNum;
   }
   for (const directory of outerDirectories) {
-    sizes[directory] += sizeNum;
+    if (sizes[directory]) {
+      sizes[directory] += sizeNum;
+    } else {
+      sizes[directory] = sizeNum;
+    }
   }
 }
 
@@ -88,3 +97,9 @@ function findTotalSizesUnder100k(sizes: Sizes): number {
   }
   return totalSizes;
 }
+
+const day7Part1Result: number = findTotalDirectorySizes(commandData);
+console.log(
+  "Day 7, Part 1: The total of directory sizes under 100k is: ",
+  day7Part1Result,
+);

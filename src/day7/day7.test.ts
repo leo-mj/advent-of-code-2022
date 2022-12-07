@@ -25,4 +25,6 @@ $ ls
 5626152 d.ext
 7214296 k`;
   expect(findTotalDirectorySizes(testCommands)).toBe(95437);
+  const test2: string = `$ cd /
+`;
 });
