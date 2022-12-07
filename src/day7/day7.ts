@@ -103,3 +103,43 @@ console.log(
   "Day 7, Part 1: The total of directory sizes under 100k is: ",
   day7Part1Result,
 );
+
+/**
+ Day 7, Part 2 of Advent of Code 2022
+ * @param commands string of command lines
+ * @returns size of smallest directory that if deleted makes the size of / smaller than 3m
+ */
+export function findSmallestSufficientDirectory(commands: string): number {
+  const commandsArr: string[] = commands.split(`\n`);
+  const sizes: Sizes = {};
+  let currentDirectory: string = "";
+  let outerDirectories: string[] = [];
+  for (const line of commandsArr) {
+    currentDirectory = interpretLine(
+      line,
+      sizes,
+      currentDirectory,
+      outerDirectories,
+    );
+  }
+  const minSufficient: number = findMinSufficient(sizes);
+  return minSufficient;
+}
+
+function findMinSufficient(sizes: Sizes): number {
+  const sufficientSize: number = 30000000 - (70000000 - sizes["/"]);
+  let minSufficient: number = sizes["/"];
+  for (const directory in sizes) {
+    const currentSize: number = sizes[directory];
+    if (currentSize < minSufficient && currentSize >= sufficientSize) {
+      minSufficient = currentSize;
+    }
+  }
+  return minSufficient;
+}
+
+const day7Part2Result: number = findSmallestSufficientDirectory(commandData);
+console.log(
+  "Day 7, Part 2: The smallest sufficient directory size is: ",
+  day7Part2Result,
+);
