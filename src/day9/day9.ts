@@ -112,3 +112,41 @@ console.log(
   "Day 9 , Part 1: The number of positions visited by the tail is: ",
   day9Part1Result,
 );
+
+export function countLongTailPositions(movements: string): number {
+  const movementArr: string[] = movements.split("\n");
+  const head: Position = { x: 0, y: 0 };
+  const tails: Position[] = [];
+  const allTailPositions: PositionLog[] = [];
+  for (let i = 0; i < 9; i++) {
+    tails.push({ x: 0, y: 0 });
+    allTailPositions.push({ 0: { 0: true } });
+  }
+  for (const movement of movementArr) {
+    moveLongRope(movement, head, tails, allTailPositions);
+  }
+  const visitedPositionsCount: number = count(allTailPositions[8]);
+  //console.log(allTailPositions)
+  return visitedPositionsCount;
+}
+
+function moveLongRope(
+  movement: string,
+  head: Position,
+  tails: Position[],
+  allTailPositions: PositionLog[],
+): void {
+  const [direction, stepNum]: [string, number] = parseMovement(movement);
+  for (let i = 0; i < stepNum; i++) {
+    moveHead(direction, head);
+    let currentHead: Position = head;
+    for (let i = 0; i < 9; i++) {
+      const currentTail = tails[i];
+      const currentTailPositions: PositionLog = allTailPositions[i];
+      moveTail(currentHead, currentTail, currentTailPositions);
+      currentHead = currentTail;
+    }
+    // console.log(movement, head, tail, tailPositions);
+  }
+  return;
+}
