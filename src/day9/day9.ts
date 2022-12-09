@@ -1,3 +1,10 @@
+import { headMovements } from "./day9-data";
+
+/**
+ * Day 9, Part 1 of Advent of Code 2022
+ * @param movements movement instructions - string
+ * @returns number of positions visited by the tail - number
+ */
 export function countTailPositions(movements: string): number {
   const movementArr: string[] = movements.split("\n");
   const head: Position = { x: 0, y: 0 };
@@ -7,7 +14,6 @@ export function countTailPositions(movements: string): number {
     move(movement, head, tail, tailPositions);
   }
   const visitedPositionsCount: number = count(tailPositions);
-  console.log(tailPositions);
   return visitedPositionsCount;
 }
 
@@ -100,3 +106,9 @@ interface Position {
 interface PositionLog {
   [x: number]: { [y: number]: boolean };
 }
+
+const day9Part1Result: number = countTailPositions(headMovements);
+console.log(
+  "Day 9 , Part 1: The number of positions visited by the tail is: ",
+  day9Part1Result,
+);
