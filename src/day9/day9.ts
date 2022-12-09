@@ -113,6 +113,11 @@ console.log(
   day9Part1Result,
 );
 
+/**
+ * Day 9, Part 2 of Advent of Code 2022
+ * @param movements movement instructions - string
+ * @returns number of positions visited by the last of nine tails - number
+ */
 export function countLongTailPositions(movements: string): number {
   const movementArr: string[] = movements.split("\n");
   const head: Position = { x: 0, y: 0 };
@@ -150,3 +155,9 @@ function moveLongRope(
   }
   return;
 }
+
+const day9Part2Result: number = countLongTailPositions(headMovements);
+console.log(
+  "Day 9 , Part 2: The number of positions visited by the last tail is: ",
+  day9Part2Result,
+);
